@@ -36,6 +36,7 @@ class WeatherforecastPlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         project.task('weatherTomorrow'){
+            group = "Weather"
             doLast {
                 println "---------------------------------------"
                 println "Tomorow it will be sunny and 25 deg. centigrade"
