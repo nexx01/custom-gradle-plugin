@@ -31,7 +31,7 @@ tasks.named('test') {
 
 //heres my task
 task spacegun(type: SpaceGunTask, group: 'Space'){
-
+   myFile ='myspaceFile.txt'
 }
 
 //heres my custom plugins that i need for this project
