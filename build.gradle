@@ -29,6 +29,13 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+//heres my task
+task spacegun(type: SpaceGunTask, group: 'Space'){
+
+}
+
+//heres my custom plugins that i need for this project
+
 apply plugin: WeatherforecastPlugin
 weather.forecast = 'snow and hail ana -12 deg cent'
 
