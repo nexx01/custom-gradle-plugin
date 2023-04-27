@@ -29,17 +29,26 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+//Extension
+class WeatherExtension {    //1 - class для расширения
+    String forecast = 'My default value'
+}
 
 //heres my custom plugins that i need for this project
 class WeatherforecastPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        project.task('weatherTomorrow'){
+//        2 - инжект расширения
+        def extension = project.extensions.create('weather', WeatherExtension)
+
+        project.task('weatherTomorrow') {
             group = "Weather"
             doLast {
                 println "---------------------------------------"
                 println "Tomorow it will be sunny and 25 deg. centigrade"
+                //        3 - использование расширения
+                println "Tomorow it will be " + extension.forecast
                 println "---------------------------------------"
             }
         }
@@ -47,4 +56,7 @@ class WeatherforecastPlugin implements Plugin<Project> {
 }
 
 apply plugin: WeatherforecastPlugin
+
+//        3 - определение значения расширения
+weather.forecast = 'snow and hail ana -10 deg cent'
 
