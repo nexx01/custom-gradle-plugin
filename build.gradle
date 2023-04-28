@@ -1,41 +1,55 @@
 plugins {
-    id 'java'
-    id 'org.springframework.boot' version '3.0.6'
-    id 'io.spring.dependency-management' version '1.1.0'
+    id 'groovy'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+publishing {
+    repositories {
+        mavenLocal {
+            name = "maven-local"
+//            url = "$buildDir/repo"
+        }
+    }
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
+//configurations {
+//    compileOnly {
+//        extendsFrom annotationProcessor
+//    }
+//}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation gradleApi()
+    implementation localGroovy()
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
 }
 
-tasks.named('test') {
+test {
     useJUnitPlatform()
 }
 
-//heres my task
-task spacegun(type: SpaceGunTask, group: 'Space'){
-   myFile ='myspaceFile.txt'
+gradlePlugin {
+    plugins {
+        simplePlugin{
+            id = 'com.example.weatherforecast'
+            implementationClass = 'com.example.plugin.WeatherforecastPlugin'
+        }
+    }
 }
 
-//heres my custom plugins that i need for this project
-
-apply plugin: WeatherforecastPlugin
-weather.forecast = 'snow and hail ana -12 deg cent'
+//heres my task
+//task spacegun(type: SpaceGunTask, group: 'Space'){
+//   myFile ='myspaceFile.txt'
+//}
+//
+//
+//apply plugin: com.example.plugin.WeatherforecastPlugin
+//weather.forecast = 'snow and hail ana -12 deg cent'
 

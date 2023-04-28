@@ -1,8 +1,7 @@
-import org.gradle.api.*;
+import org.gradle.api.Plugin
+import org.gradle.plugins.ide.eclipse.model.Project
 
 //heres my custom plugins that i need for this project
-
-
 class WeatherforecastPlugin implements Plugin<Project> {
 
     @Override
